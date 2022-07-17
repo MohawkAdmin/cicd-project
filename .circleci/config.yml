@@ -5,7 +5,7 @@ commands:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
     # parameters:
       # Add parameter here   
-    steps:
+    steps:end
       - run:
           name: Destroy environments
           when: on_fail
@@ -169,23 +169,27 @@ jobs:
       - destroy-environment
 #        when: on_fail      
 
-#   configure-infrastructure:
-#     # docker:
-#       amazon/aws-cli
-#     steps:
-#       # Checkout code from git
-#       # Add ssh keys with fingerprint
-#       # attach workspace
-#       - run:
-#           name: Install dependencies
-#           command: |
-#             # Your code here
-#             exit 1
-#       - run:
-#           name: Configure server
-#           command: |
-#             # Your code here
-#             exit 1
+  configure-infrastructure:
+    docker:
+      - image: python:3.7-alpine3.11
+
+    steps:
+      - checkout
+      - add_ssh_keys:
+            # You can get this ID in the section where you registered the SSH Key
+            fingerprints: ["bf:0f:3c:31:ab:f7:d0:1b:89:28:32:5e:24:41:5b:f5"]
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Install dependencies
+          command: |
+            yum install -y tar gzip ansible nodjs npm
+#            exit 1
+      # - run:
+      #     name: Configure server
+      #     command: |
+      #       # Your code here
+      #       exit 1
 #       # Here's where you will add some code to rollback on failure      
 
 #   run-migrations:
