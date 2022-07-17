@@ -195,7 +195,8 @@ jobs:
             npm run build \
             cd .. \
             # Zip the directory \
-            tar -C backend -czvf artifact.tar.gz . \
+            tar -czvf artifact.tar.gz . \
+#           tar -C backend -czvf artifact.tar.gz . \
             cd .circleci/ansible \
             ansible-playbook -i inventory.txt deploy-backend.yml
 #            echo "Contents  of the inventory.txt file is -------"
