@@ -5,7 +5,7 @@ commands:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
     # parameters:
       # Add parameter here   
-    steps:end
+    steps:
       - run:
           name: Destroy environments
           when: on_fail
@@ -177,7 +177,7 @@ jobs:
       - checkout
       - add_ssh_keys:
             # You can get this ID in the section where you registered the SSH Key
-            fingerprints: ["bf:0f:3c:31:ab:f7:d0:1b:89:28:32:5e:24:41:5b:f5"]
+          fingerprints: ["bf:0f:3c:31:ab:f7:d0:1b:89:28:32:5e:24:41:5b:f5"]
       - attach_workspace:
           at: ~/
       - run:
