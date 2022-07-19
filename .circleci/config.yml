@@ -210,12 +210,12 @@ jobs:
 # from kvdb.io: 8V3XpyGAgimEzz3wTNVM9c
 
       - run:
-        name: Send migration status to kvdb.io OR memstash.io
-        command: |   
-            if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
-            then
-                curl https://kvdb.io/8V3XpyGAgimEzz3wTNVM9c/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
-            fi
+          name: Send migration status to kvdb.io OR memstash.io
+          command: |   
+              if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
+              then
+                  curl https://kvdb.io/8V3XpyGAgimEzz3wTNVM9c/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
+              fi
 #             exit 1
 #      # Here's where you will add some code to rollback on failure      
 
