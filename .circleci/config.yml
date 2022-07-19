@@ -166,7 +166,7 @@ jobs:
           paths:
             - project/.circleci/ansible/inventory.txt
       # Here's where you will add some code to rollback on failure
-      - destroy-environment
+#      - destroy-environment
 #        when: on_fail      
 
   configure-infrastructure:
@@ -180,8 +180,8 @@ jobs:
           fingerprints: ["d8:18:9a:f0:f2:55:19:ef:a3:65:7a:b4:29:ee:15:b2"]
       - attach_workspace:
           root: ~/
-          paths:
-            - inventory.txt
+#          paths:
+#            - inventory.txt
       - run:
           name: Install dependencies
           command: |
