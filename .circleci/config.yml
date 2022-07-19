@@ -177,15 +177,15 @@ jobs:
       - checkout
       - add_ssh_keys:
             # You can get this ID in the section where you registered the SSH Key
-          fingerprints: ["bf:0f:3c:31:ab:f7:d0:1b:89:28:32:5e:24:41:5b:f5"]
+          fingerprints: ["d8:18:9a:f0:f2:55:19:ef:a3:65:7a:b4:29:ee:15:b2"]
       - attach_workspace:
-          at: ~/
+          root: ~/
+          paths:
+            - inventory.txt
       - run:
           name: Install dependencies
           command: |
             apk add --update ansible
-#            apt-get install tar gzip ansible nodjs npm
-#            yum -y install tar gzip ansible nodjs npm
 #            exit 1
       - run:
           name: Configure server
