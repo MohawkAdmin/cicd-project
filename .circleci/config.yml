@@ -179,7 +179,8 @@ jobs:
             # You can get this ID in the section where you registered the SSH Key
           fingerprints: ["d8:18:9a:f0:f2:55:19:ef:a3:65:7a:b4:29:ee:15:b2"]
       - attach_workspace:
-          root: ~/
+          at: ~/
+#          root: ~/
 #          paths:
 #            - inventory.txt
       - run:
