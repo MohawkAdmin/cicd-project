@@ -228,6 +228,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/
+      - run: yum install -y tar
       - run:
           name: Install dependencies
           command: |
