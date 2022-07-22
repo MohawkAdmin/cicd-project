@@ -229,7 +229,7 @@ jobs:
       - run: 
           name: install tar
           command: |
-            yum install -y tar
+            yum install -y tar gzip
       - attach_workspace:
           at: ~/
 
