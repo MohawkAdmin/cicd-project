@@ -226,21 +226,21 @@ jobs:
       - image: amazon/aws-cli   # python:3.7-alpine3.11  #
     steps:
       - checkout
-      - attach_workspace:
-          at: ~/
+      # - attach_workspace:
+      #     at: ~/
 
       - run: 
           name: install dependencies
           command: |
             apk add --update tar gzip
 #            yum install -y tar gzip
-      # - attach_workspace:
-      #     at: ~/
+     - attach_workspace:
+          at: ~/
 
-      - run:
-          name: Install ansible
-          command: |
-            apk add --update ansible
+      # - run:
+      #     name: Install ansible
+      #     command: |
+      #       apk add --update ansible
 
       # - run:
       #     name: Install dependencies 2
