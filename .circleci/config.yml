@@ -223,19 +223,31 @@ jobs:
 
   deploy-frontend:
     docker:
-      - image: amazon/aws-cli   # python:3.7-alpine3.11  #
+      - image: python:3.7-alpine3.11  # amazon/aws-cli   # 
     steps:
       - checkout
-      # - attach_workspace:
-      #     at: ~/
-
-      - run: 
-          name: install dependencies
-          command: |
-            yum install -y tar gzip
-            #            apk add --update tar gzip
       - attach_workspace:
           at: ~/
+
+      # - run: 
+      #     name: install dependencies
+      #     command: |
+      #       yum install -y tar gzip
+#            apk add --update tar gzip
+
+
+      - run:
+          name: Install dependencies
+          command: |
+            apk add --update curl nodejs npm
+            apk add --update curl tar
+            npm install webpack-dev-server -g
+            npm install
+            pip install awscli
+
+
+      # - attach_workspace:
+      #     at: ~/
 
       # - run:
       #     name: Install ansible
