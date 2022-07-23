@@ -226,36 +226,45 @@ jobs:
       - image: python:3.7-alpine3.11  # amazon/aws-cli
     steps:
       - checkout
-      - run: 
-          name: install tar
-          command: |
-            apk add --update tar gzip
-#            yum install -y tar gzip
       - attach_workspace:
           at: ~/
 
-      - run:
-          name: Install dependencies
+      - run: 
+          name: install dependencies
           command: |
-            apk add --update ansible npm curl
+            apk add --update tar gzip npm curl
+#            yum install -y tar gzip
+      # - attach_workspace:
+      #     at: ~/
+
+      - run:
+          name: Install ansible
+          command: |
+            apk add --update ansible
+
+      # - run:
+      #     name: Install dependencies 2
+      #     command: |
+      #       apk add --update npm curl
 #            apk add --update ansible
 
-      - run: 
-          name: Install aws cli
-          command: |
-            curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip" \
-            -o "awscliv2.zip" 
-            unzip awscliv2.zip 
-            ./aws/install
-
-            cd frontend
-            npm install
-            npm run build
-            tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
-            apk add --update ansible
-            aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive 
+      # - run: 
+      #     name: Install aws cli
+      #     command: |
+#            curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip" \
+#            -o "awscliv2.zip" 
+#            unzip awscliv2.zip 
+#            ./aws/install
 
 
+      # - run: 
+      #     name: Deploy frontend objects
+      #     command: |
+      #       cd frontend
+      #       npm install
+      #       npm run build
+      #       tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
+      #       aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive 
 
 
       # - run:
@@ -272,16 +281,21 @@ jobs:
             echo "API_URL = ${API_URL}"
             echo API_URL="http://${BACKEND_IP}:3030" >> frontend/.env
             cat frontend/.env
-      # - run:
-      #     name: Deploy frontend objects
-      #     command: | 
-      #       cd frontend
-      #       npm install
-      #       npm run build
-      #       tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
-      #       /usr/local/bin/aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive     
+      - run:
+          name: Deploy frontend objects
+          command: | 
+            cd frontend
+            npm install
+            npm run build
+            tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
+            /usr/local/bin/aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive     
       #   # Here's where you will add some code to rollback on failure      
-                    
+
+
+
+
+
+
 #   deploy-backend:
 #     docker:
 #       # Docker image here that supports Ansible
