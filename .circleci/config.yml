@@ -232,8 +232,8 @@ jobs:
       - run: 
           name: install dependencies
           command: |
-            apk add --update tar gzip
-#            yum install -y tar gzip
+#            apk add --update tar gzip
+            yum install -y tar gzip
       - attach_workspace:
           at: ~/
 
