@@ -356,7 +356,6 @@ jobs:
             pwd
             ls -al
             ansible-playbook -i inventory.txt deploy-backend.yml
-
 #                     tar -C backend -czvf artifact.tar.gz .
 
       # Here's where you will add some code to rollback on failure  
