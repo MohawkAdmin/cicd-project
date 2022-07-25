@@ -329,6 +329,9 @@ jobs:
           name: Deploy backend
           command: |
             cd backend
+            echo "Here is first pwd: "
+            pwd
+            ls
             npm i
             npm run build
             cd ..
@@ -338,6 +341,7 @@ jobs:
             cat inventory.txt
             echo "Contents of the directory Matt are: " 
             pwd
+            ls
             ansible-playbook -i inventory.txt deploy-backend.yml
       # Here's where you will add some code to rollback on failure  
 
