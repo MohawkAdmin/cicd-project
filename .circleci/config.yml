@@ -349,6 +349,7 @@ jobs:
             pwd
             ls -al
             echo "coping artifact"
+            mkdir /root/project/.circleci/ansible/roles/deploy/files
             cp /root/project/artifact.tar.gz /root/project/.circleci/ansible/roles/deploy/files
             cd /root/project/.circleci/ansible/roles/deploy/files
             echo "after copy"
