@@ -313,7 +313,9 @@ jobs:
       - checkout
       - add_ssh_keys:
             # You can get this ID in the section where you registered the SSH Key
-          fingerprints: ["d8:18:9a:f0:f2:55:19:ef:a3:65:7a:b4:29:ee:15:b2"]
+#          fingerprints: ["d8:18:9a:f0:f2:55:19:ef:a3:65:7a:b4:29:ee:15:b2"]
+            fingerprints: ["bf:0f:3c:31:ab:f7:d0:1b:89:28:32:5e:24:41:5b:f5"]
+
       - attach_workspace:
           at: ~/
       - run:
@@ -330,7 +332,7 @@ jobs:
             npm i
             npm run build
             cd ..
-            # Zip the directory
+#            # Zip the directory
             tar -C backend -czvf artifact.tar.gz .
             cd .circleci/ansible
             echo "Contents  of the inventory.txt file is -------"
