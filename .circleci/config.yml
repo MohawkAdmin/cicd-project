@@ -351,10 +351,10 @@ jobs:
             echo "coping artifact"
             mkdir /root/project/.circleci/ansible/roles/deploy/files
             cp /root/project/artifact.tar.gz /root/project/.circleci/ansible/roles/deploy/files
-            cd /root/project/.circleci/ansible/roles/deploy/files
-            echo "after copy"
-            pwd
-            ls -al
+            # cd /root/project/.circleci/ansible/roles/deploy/files
+            # echo "after copy"
+            # pwd
+            # ls -al
             ansible-playbook -i inventory.txt deploy-backend.yml
 #                     tar -C backend -czvf artifact.tar.gz .
 
