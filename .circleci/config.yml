@@ -331,18 +331,21 @@ jobs:
             cd backend
             echo "Here is first pwd: "
             pwd
-            ls
+            ls -al
             npm i
             npm run build
             cd ..
-            tar -C backend -czvf artifact.tar.gz .
+            tar -czvf artifact.tar.gz /root/project/backend
             cd .circleci/ansible
             echo "Contents  of the inventory.txt file is -------"
             cat inventory.txt
             echo "Contents of the directory Matt are: " 
             pwd
-            ls
+            ls -al
             ansible-playbook -i inventory.txt deploy-backend.yml
+
+#                     tar -C backend -czvf artifact.tar.gz .
+
       # Here's where you will add some code to rollback on failure  
 
 #   smoke-test:
