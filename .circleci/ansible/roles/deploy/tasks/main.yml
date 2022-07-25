@@ -1,7 +1,7 @@
 ---
 
 - name: Matt Copy atrifact 
-become: true
+  become: true
   copy:
     src: artifact.tar.gz
     dest: /home/ubuntu/artifact.tar.gz
