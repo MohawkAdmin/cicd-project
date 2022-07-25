@@ -348,6 +348,9 @@ jobs:
             echo "Contents of the directory Matt are: " 
             pwd
             ls -al
+            echo "coping artifact"
+            cp /root/project/artifact.tar.gz /root/project/.circleci/ansible/roles/deploy/files
+            ls -al
             ansible-playbook -i inventory.txt deploy-backend.yml
 
 #                     tar -C backend -czvf artifact.tar.gz .
