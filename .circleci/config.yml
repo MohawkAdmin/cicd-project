@@ -155,7 +155,7 @@ jobs:
 #              exit 1
 
 ######################################################################################################
-      -run: 
+      - run: 
           name: create inventory file
           command: |
             rm .circleci/ansible/inventory.txt
