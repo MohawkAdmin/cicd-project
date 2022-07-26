@@ -162,6 +162,7 @@ jobs:
               --region us-east-1 \
               --output text >> .circleci/ansible/inventory.txt 
 #            exit 1  **changed udapeople--backend to udapeople-backend
+
       - persist_to_workspace:
           root: ~/
           paths:
