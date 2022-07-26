@@ -158,7 +158,7 @@ jobs:
           command: |
             aws ec2 describe-instances \
               --region us-east-1 \
-              --filters Name=tag:Project,Values=udapeople \
+              --filters Name=tag:project,Values=udapeople \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --output text >> .circleci/ansible/inventory.txt 
 #            exit 1  **changed udapeople--backend to udapeople-backend
