@@ -153,6 +153,13 @@ jobs:
               --stack-name udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7} \
               --parameter-overrides ID=${CIRCLE_WORKFLOW_ID:0:7} 
 #              exit 1
+
+######################################################################################################
+      -run: 
+          name: create inventory file
+          command: |
+            rm .circleci/ansible/inventory.txt
+            echo "[web]" > .circleci/ansible/inventory.txt
       - run:
           name: Add back-end ip to ansible inventory
           command: |
@@ -160,7 +167,16 @@ jobs:
               --region us-east-1 \
               --filters Name=tag:project,Values=udapeople \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
-              --output text >> .circleci/ansible/inventory.txt 
+              --output text >> .circleci/ansible/inventory.txt
+
+################# This is a test to see what's in inventory file ########################
+      - run:
+          name: See inventory file
+          command: |
+            echo "Contents  of the inventory.txt file is -------"
+            cat inventory.txt
+
+
 #            exit 1  **changed udapeople--backend to udapeople-backend
 
       - persist_to_workspace:
