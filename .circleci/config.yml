@@ -336,26 +336,13 @@ jobs:
           name: Deploy backend
           command: |
             cd backend
-#            echo "Here is first pwd: "
-#            pwd
-#            ls -al
             npm i
             npm run build
             cd ..
-#            echo "Here is the second listing before making archive: "
-#            pwd
-#            ls -al
             tar -czvf artifact.tar.gz /root/project/backend
-#            echo "Here is the third listing after making archive: "
-#            pwd
-#            ls -al
             cd .circleci/ansible
             echo "Contents  of the inventory.txt file is -------"
             cat inventory.txt
-#            echo "Contents of the directory Matt are: " 
-#            pwd
-#            ls -al
-#            echo "coping artifact"
             mkdir /root/project/.circleci/ansible/roles/deploy/files
             cp /root/project/artifact.tar.gz /root/project/.circleci/ansible/roles/deploy/files
             # cd /root/project/.circleci/ansible/roles/deploy/files
