@@ -378,7 +378,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apk add --update ansible
+            apk add --update ansible curl
             apk add --update npm
             apk add --update tar gzip
       # - run:
