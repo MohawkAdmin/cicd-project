@@ -291,7 +291,11 @@ jobs:
       - run:
           name: Get backend URL
           command: |
-            export BACKEND_IP=$(aws ec2 describe-instances...............)
+            export BACKEND_IP=$(aws ec2 describe-instances \
+              --region us-east-1 \
+              --filters Name=tag:project,Values=udapeople \
+              --query 'Reservations[*].Instances[*].PublicIpAddress' \
+              --output text)
             export API_URL="http://${BACKEND_IP}:3030"
             echo "API_URL = ${API_URL}"
             echo API_URL="http://${BACKEND_IP}:3030" >> frontend/.env
@@ -332,26 +336,26 @@ jobs:
           name: Deploy backend
           command: |
             cd backend
-            echo "Here is first pwd: "
-            pwd
-            ls -al
+#            echo "Here is first pwd: "
+#            pwd
+#            ls -al
             npm i
             npm run build
             cd ..
-            echo "Here is the second listing before making archive: "
-            pwd
-            ls -al
+#            echo "Here is the second listing before making archive: "
+#            pwd
+#            ls -al
             tar -czvf artifact.tar.gz /root/project/backend
-            echo "Here is the third listing after making archive: "
-            pwd
-            ls -al
+#            echo "Here is the third listing after making archive: "
+#            pwd
+#            ls -al
             cd .circleci/ansible
             echo "Contents  of the inventory.txt file is -------"
             cat inventory.txt
-            echo "Contents of the directory Matt are: " 
-            pwd
-            ls -al
-            echo "coping artifact"
+#            echo "Contents of the directory Matt are: " 
+#            pwd
+#            ls -al
+#            echo "coping artifact"
             mkdir /root/project/.circleci/ansible/roles/deploy/files
             cp /root/project/artifact.tar.gz /root/project/.circleci/ansible/roles/deploy/files
             # cd /root/project/.circleci/ansible/roles/deploy/files
@@ -362,10 +366,6 @@ jobs:
 #                     tar -C backend -czvf artifact.tar.gz .
 
       # Here's where you will add some code to rollback on failure  
-
-
-
-
 
 
   smoke-test:
@@ -389,6 +389,12 @@ jobs:
           name: Backend smoke test.
           command: |
               # Fetch and prepare the BACKEND_IP env var
+              BACKEND_IP=$(aws ec2 describe-instances \
+              --region us-east-1 \
+              --filters Name=tag:project,Values=udapeople \
+              --query 'Reservations[*].Instances[*].PublicIpAddress' \
+              --output text)
+
               export API_URL="http://${BACKEND_IP}:3030"
               echo "${API_URL}"
               if curl "${API_URL}/api/status" | grep "ok"
