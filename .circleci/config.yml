@@ -357,7 +357,7 @@ jobs:
 
   smoke-test:
     docker:
-      - image: python:3.7-alpine3.11
+      - image: python:3.7-alpine3.11   python:3.7-alpine3.11
     # docker:
       # Lightweight Docker image 
     steps:
@@ -376,7 +376,7 @@ jobs:
           name: Backend smoke test.
           command: |
               # Fetch and prepare the BACKEND_IP env var
-              BACKEND_IP=$(aws ec2 describe-instances \
+              export BACKEND_IP=$(aws ec2 describe-instances \
               --region us-east-1 \
               --filters Name=tag:project,Values=udapeople \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
