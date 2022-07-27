@@ -365,9 +365,12 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apk add --update ansible curl
+            apk add --update curl
             apk add --update npm
-            apk add --update tar gzip
+            apk add --update awscli
+
+        #things I took out of update command above:
+        # ansible, tar, gzip
       # - run:
       #     name: Get backend url
       #     command: |
