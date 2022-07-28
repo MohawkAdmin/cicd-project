@@ -9,7 +9,7 @@ commands:
     steps:
       - run:
           name: Destroy environments
-          #when: on_fail
+          when: on_fail
           command: |
             echo "Destroying environment: << parameters.workflow_id >> "
 
@@ -425,8 +425,7 @@ jobs:
               fi
 
       - destroy environment
-        when: on_fail
-      
+              
       # Here's where you will add some code to rollback on failure  
 
 
