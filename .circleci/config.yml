@@ -378,6 +378,7 @@ jobs:
       - run:
           name: Backend smoke test.
           command: |
+              echo TYPEORM_HOST=$TYPEORM_HOST >> "backend/.env"
               # Fetch and prepare the BACKEND_IP env var
               export BACKEND_IP=$(aws ec2 describe-instances \
               --region us-east-1 \
