@@ -9,9 +9,14 @@ commands:
     steps:
       - run:
           name: Destroy environments
-          when: on_fail
+          #when: on_fail
           command: |
             echo "Destroying environment: << parameters.workflow_id >> "
+
+            aws s3 rm s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
+            sleep 10
+            aws s3 rb s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} -- force
+            sleep 10
             aws cloudformation delete-stack --stack-name udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}
             aws cloudformation delete-stack --stack-name udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}
 #            exit 1
@@ -146,7 +151,7 @@ jobs:
               --tags project=udapeople \
               --stack-name udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7} \
               --parameter-overrides ID=${CIRCLE_WORKFLOW_ID:0:7}  
-#              exit 1
+
       - run:
           name: Ensure front-end infrastructure exist
           command: |
@@ -155,7 +160,6 @@ jobs:
               --tags project=udapeople2 \
               --stack-name udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7} \
               --parameter-overrides ID=${CIRCLE_WORKFLOW_ID:0:7} 
-#              exit 1
 
       - run:
           name: Add back-end ip to ansible inventory
@@ -165,8 +169,6 @@ jobs:
               --filters Name=tag:project,Values=udapeople \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --output text >> .circleci/ansible/inventory.txt
-
-#            exit 1  **changed udapeople--backend to udapeople-backend
 
       - persist_to_workspace:
           root: ~/
@@ -381,19 +383,19 @@ jobs:
       - run:
           name: Backend smoke test.
           command: |
-              echo TYPEORM_HOST=$TYPEORM_HOST >> "backend/.env"
-              echo AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID  >> "backend/.env"
-              echo AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION >> "backend/.env"
-              echo AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY >> "backend/.env"
-              echo TYPEORM_CONNECTION=$TYPEORM_CONNECTION >> "backend/.env"
-              echo TYPEORM_DATABASE=$TYPEORM_DATABASE >> "backend/.env"
-              echo TYPEORM_ENTITIES=$TYPEORM_ENTITIES >> "backend/.env"
-              echo TYPEORM_HOST=$TYPEORM_HOST >> "backend/.env"
-              echo TYPEORM_MIGRATIONS=$TYPEORM_MIGRATIONS >> "backend/.env"
-              echo TYPEORM_MIGRATIONS_DIR=$TYPEORM_MIGRATIONS_DIR >> "backend/.env"
-              echo TYPEORM_PASSWORD=$TYPEORM_PASSWORD >> "backend/.env"
-              echo TYPEORM_PORT=$TYPEORM_PORT >> "backend/.env"
-              echo TYPEORM_USERNAME=$TYPEORM_USERNAME >> "backend/.env"
+              # echo TYPEORM_HOST=$TYPEORM_HOST >> "backend/.env"
+              # echo AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID  >> "backend/.env"
+              # echo AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION >> "backend/.env"
+              # echo AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY >> "backend/.env"
+              # echo TYPEORM_CONNECTION=$TYPEORM_CONNECTION >> "backend/.env"
+              # echo TYPEORM_DATABASE=$TYPEORM_DATABASE >> "backend/.env"
+              # echo TYPEORM_ENTITIES=$TYPEORM_ENTITIES >> "backend/.env"
+              # echo TYPEORM_HOST=$TYPEORM_HOST >> "backend/.env"
+              # echo TYPEORM_MIGRATIONS=$TYPEORM_MIGRATIONS >> "backend/.env"
+              # echo TYPEORM_MIGRATIONS_DIR=$TYPEORM_MIGRATIONS_DIR >> "backend/.env"
+              # echo TYPEORM_PASSWORD=$TYPEORM_PASSWORD >> "backend/.env"
+              # echo TYPEORM_PORT=$TYPEORM_PORT >> "backend/.env"
+              # echo TYPEORM_USERNAME=$TYPEORM_USERNAME >> "backend/.env"
               # Fetch and prepare the BACKEND_IP env var
               export BACKEND_IP=$(aws ec2 describe-instances \
               --region us-east-1 \
@@ -417,10 +419,14 @@ jobs:
               if curl -s ${URL} | grep "Welcome"
               then
                   # Change this to 0 after the job fails
-                return 0
+                return 1
               else
                 return 1
               fi
+
+      - destroy environment:
+        when: on fail
+      
       # Here's where you will add some code to rollback on failure  
 
 
