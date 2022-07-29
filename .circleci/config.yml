@@ -33,8 +33,8 @@ commands:
             # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable
             # SUCCESS = 1
 
-            SUCCESS=$(curl --insecure  https://kvdb.io/9GE4jRtKznmVKRfvdBABBe/migration_<< parameters.workflow_id >>)
-
+            SUCCESS=$(curl --insecure  https://kvdb.io/8V3XpyGAgimEzz3wTNVM9c/migration_${CIRCLE_WORKFLOW_ID:0:7})
+          
             # Logic for reverting the database state
             if (( $SUCCESS == 1 ));
             then
