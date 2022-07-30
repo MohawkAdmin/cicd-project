@@ -286,7 +286,7 @@ jobs:
             npm install
             pip install awscli
 
-      -run:
+      - run:
           name: Add environment variables
           command: |
             echo TYPEORM_HOST=$TYPEORM_HOST >> "backend/.env"
