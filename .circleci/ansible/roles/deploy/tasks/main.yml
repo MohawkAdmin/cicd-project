@@ -7,7 +7,7 @@
     
 - name: Upload app 
   copy:
-    src: files/artifact.tar
+    src: files/artifact.tar.gz
     dest: "~/app"
 
 - name: Install dependencies
@@ -19,7 +19,7 @@
     npm install -g npm
     npm install -g pm2
     cd /home/ubuntu/app
-    tar xf /home/ubuntu/app/artifact.tar
+    tar xzvf /home/ubuntu/app/artifact.tar.gz
   
 - name: Start backend
   shell:  |
