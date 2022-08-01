@@ -1,0 +1,17 @@
+---
+
+- name: Matt Copy atrifact 
+  become: true
+  copy:
+    src: artifact.tar.gz
+    dest: /home/ubuntu/artifact.tar.gz
+
+- name: Start PM2
+  shell: |
+    echo "Here is some inside stuff"
+    ls -al
+    cd /home/ubuntu/
+    tar xzvf artifact.tar.gz
+    npm install
+    pm2 stop default
+    pm2 start npm -- start
