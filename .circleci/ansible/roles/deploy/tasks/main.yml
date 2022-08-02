@@ -21,7 +21,7 @@
     cd /home/ubuntu/app
     tar xzvf /home/ubuntu/app/artifact.tar.gz
   
-    npm run start
+    # npm run start
 
 
     # npm install
