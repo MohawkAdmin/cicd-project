@@ -36,9 +36,7 @@
     TYPEORM_USERNAME: udacity
     TYPEORM_PASSWORD: Buga0909
     TYPEORM_DATABASE: udapeopledb
-  
-
-  
+    
 # - name: Start backend
 #   shell:  |
 #     # /usr/bin/pm2 start /home/ubuntu/app/dist/main.js --name backend -f
