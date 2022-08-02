@@ -407,9 +407,6 @@ jobs:
             echo TYPEORM_USERNAME=$TYPEORM_USERNAME >> "backend/.env"
 
 
-
-
-
       - run:
           name: Deploy backend
           command: |
