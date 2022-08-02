@@ -10,7 +10,7 @@
     src: files/artifact.tar.gz
     dest: "~/app"
 
-- name: Install dependencies
+- name: Install dependencies and stuff
   become: true
   shell: |
     curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
@@ -27,6 +27,8 @@
     # npm install
     # pm2 stop default
     # pm2 start npm -- start
+
+
   environment:
     ENVIRONMENT: production
     NODE_ENV: production
@@ -40,8 +42,14 @@
     TYPEORM_PASSWORD: Buga0909
     TYPEORM_DATABASE: udapeopledb
     
-# - name: Start backend
-#   shell:  |
+- name: Start backend
+  become: true
+  shell:  |
+    npm install
+    pm2 stop default
+    pm2 start npm -- start
+    npm run start
+
 #     # /usr/bin/pm2 start /home/ubuntu/app/dist/main.js --name backend -f
 #   environment:
 #     ENVIRONMENT: production
