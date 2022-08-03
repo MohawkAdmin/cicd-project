@@ -48,6 +48,9 @@
     npm install
     pm2 stop default
     pm2 start npm -- start
+
+#    /usr/bin/pm2 start /home/ubuntu/app/dist/main.js --name backend -f
+
     cd /home/ubuntu/app/root/project/backend
     npm run start
 
