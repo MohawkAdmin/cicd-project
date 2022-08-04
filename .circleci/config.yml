@@ -470,7 +470,11 @@ jobs:
               # echo TYPEORM_PORT=$TYPEORM_PORT >> "backend/.env"
               # echo TYPEORM_USERNAME=$TYPEORM_USERNAME >> "backend/.env"
               
-                                      
+
+              cd /home/ubuntu/app/root/project/backend
+              npm run start
+
+
               #Fetch and prepare the BACKEND_IP env var
 
 
