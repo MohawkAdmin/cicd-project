@@ -52,6 +52,7 @@
     
     # sleep 120
 
+
     # cd /home/ubuntu/app/root/project/backend
     # npm run start
 
