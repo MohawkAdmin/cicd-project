@@ -51,8 +51,8 @@
     
     # sleep 120
 
-    cd /home/ubuntu/app/root/project/backend
-    npm run start
+    # cd /home/ubuntu/app/root/project/backend
+    # npm run start
 
 #     # /usr/bin/pm2 start /home/ubuntu/app/dist/main.js --name backend -f
 #   environment:
