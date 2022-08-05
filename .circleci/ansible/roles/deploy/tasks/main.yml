@@ -45,18 +45,18 @@
 - name: Start backend
   become: true
   shell:  |
-    no_output_timeout: 30m
-    cd /home/ubuntu/app/root/project/backend
-    npm run start
-    # if I use this code above it just times out
+    # no_output_timeout: 30m
+    # cd /home/ubuntu/app/root/project/backend
+    # npm run start
+    # # if I use this code above it just times out
 
 
 
     # ##if I use this code the smoketest fails with access denied
     # ##I can then ssh into the ec2 and start it manually and smoketest passes
-    # npm install
-    # pm2 stop default
-    # pm2 start npm -- run start
+    npm install
+    pm2 stop default
+    pm2 start npm -- run start
     # # npm run start
     
     # # # sleep 120
