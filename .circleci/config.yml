@@ -552,9 +552,9 @@ jobs:
       # - revert-migrations
 
 
-cleanup:
-    # docker:
-      # Docker image here
+  cleanup:
+    docker:
+      - image: amazon/aws-cli
     steps:
       - checkout
       - run:
