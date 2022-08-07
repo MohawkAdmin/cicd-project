@@ -611,9 +611,9 @@ workflows:
           #   branches:
           #     only: [test-feature-branch]
 
-          filters:
-            branches:
-              only: [matt-new-branch]
+          # filters:
+          #   branches:
+          #     only: [matt-new-branch]
 
       - configure-infrastructure:
           requires: [deploy-infrastructure]
