@@ -613,7 +613,7 @@ workflows:
 
           filters:
             branches:
-              only: [main]
+              only: [matt-new-branch]
 
       - configure-infrastructure:
           requires: [deploy-infrastructure]
